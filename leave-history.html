@@ -4,6 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leave History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #333;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 16px;
+        }
+        h1 { color: #2c3e50; }
+        a { color: #2980b9; text-decoration: none; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+        th { background: #2c3e50; color: #fff; }
+        tr:hover { background: #f1f1f1; }
+        .approved { color: green; font-weight: bold; }
+        .rejected { color: red; font-weight: bold; }
+        .pending { color: orange; font-weight: bold; }
+    </style>
 </head>
 <body>
     <header>
@@ -12,7 +40,7 @@
     </header>
 
     <main>
-        <table border="1" cellpadding="8">
+        <table>
             <thead>
                 <tr>
                     <th>Leave Type</th>
@@ -28,21 +56,21 @@
                     <td>12-01-2026</td>
                     <td>13-01-2026</td>
                     <td>2</td>
-                    <td>Approved</td>
+                    <td class="approved">Approved</td>
                 </tr>
                 <tr>
                     <td>Sick Leave</td>
                     <td>09-02-2026</td>
                     <td>09-02-2026</td>
                     <td>1</td>
-                    <td>Rejected</td>
+                    <td class="rejected">Rejected</td>
                 </tr>
                 <tr>
                     <td>Earned Leave</td>
                     <td>23-03-2026</td>
                     <td>27-03-2026</td>
                     <td>5</td>
-                    <td>Pending</td>
+                    <td class="pending">Pending</td>
                 </tr>
             </tbody>
         </table>
