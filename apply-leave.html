@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Leave</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #1d302a;
+            --muted: #61716a;
+            --paper: #f4f5ef;
+            --surface: #ffffff;
+            --line: #dce2db;
+            --green: #245c48;
+            --green-dark: #194333;
+            --accent: #d18a42;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: "Trebuchet MS", sans-serif;
+            line-height: 1.5;
+        }
+
+        .topbar {
+            padding: 18px 24px;
+            background: var(--green-dark);
+            color: #fff;
+        }
+
+        .topbar-inner,
+        main {
+            width: min(100% - 40px, 880px);
+            margin: 0 auto;
+        }
+
+        .topbar-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .topbar a {
+            color: #fff;
+            font-size: 14px;
+            text-underline-offset: 4px;
+        }
+
+        main {
+            padding: 48px 0 64px;
+        }
+
+        .eyebrow {
+            margin: 0 0 8px;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: Georgia, serif;
+            font-size: 36px;
+            font-weight: 400;
+            line-height: 1.15;
+        }
+
+        .intro {
+            margin: 10px 0 28px;
+            color: var(--muted);
+        }
+
+        .form-panel {
+            padding: 28px;
+            border: 1px solid var(--line);
+            border-top: 4px solid var(--accent);
+            background: var(--surface);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px 18px;
+        }
+
+        .field {
+            display: flex;
+            min-width: 0;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label,
+        .field-label {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            min-height: 44px;
+            padding: 10px 12px;
+            border: 1px solid #bfcac1;
+            border-radius: 3px;
+            color: var(--ink);
+            background: #fff;
+            font: inherit;
+        }
+
+        textarea {
+            min-height: 118px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--green);
+            outline: 3px solid rgb(36 92 72 / 15%);
+        }
+
+        input[readonly] {
+            color: var(--muted);
+            background: #f5f7f4;
+        }
+
+        .duration {
+            align-self: end;
+            min-height: 44px;
+            padding: 10px 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-top: 24px;
+        }
+
+        button {
+            min-height: 44px;
+            padding: 10px 20px;
+            border: 0;
+            border-radius: 3px;
+            color: #fff;
+            background: var(--green);
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: var(--green-dark);
+        }
+
+        .notice {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .result {
+            margin: 20px 0 0;
+            padding: 12px 14px;
+            border-left: 3px solid var(--green);
+            background: #edf4ef;
+            color: var(--ink);
+        }
+
+        .result[hidden] {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .topbar {
+                padding: 15px 20px;
+            }
+
+            .topbar-inner,
+            main {
+                width: min(100% - 32px, 880px);
+            }
+
+            main {
+                padding-top: 34px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .form-panel {
+                padding: 20px 16px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 17px;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+
+            .duration {
+                align-self: auto;
+                min-height: 0;
+                padding: 0;
+            }
+
+            .actions {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <p class="brand">Leave Management</p>
+            <a href="leave-balance.html">Back to leave balance</a>
+        </div>
+    </header>
+
+    <main>
+        <p class="eyebrow">Employee leave</p>
+        <h1>Apply for leave</h1>
+
+        <section class="form-panel" aria-label="Leave application form">
+            <form id="leave-form">
+                <div class="form-grid">
+                    <div class="field full">
+                        <label for="employee">Employee</label>
+                        <input id="employee" name="employee" placeholder="Employee Name">
+                    </div>
+
+                    <div class="field full">
+                        <label for="leave-type">Leave type</label>
+                        <select id="leave-type" name="leave-type" required>
+                            <option value="" selected disabled>Select leave type</option>
+                            <option value="Casual Leave">Casual Leave</option>
+                            <option value="Sick Leave">Sick Leave</option>
+                            <option value="Earned Leave">Earned Leave</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="start-date">Start date</label>
+                        <input id="start-date" name="start-date" type="date" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="end-date">End date</label>
+                        <input id="end-date" name="end-date" type="date" required>
+                    </div>
+
+                    <p class="duration full" id="duration" aria-live="polite">Choose dates to see the duration.</p>
+
+                    <div class="field full">
+                        <label for="reason">Reason for leave</label>
+                        <textarea id="reason" name="reason" maxlength="500" required></textarea>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button type="submit">Submit application</button>
+                    <p class="notice">This page is a demo; requests are not sent to a manager.</p>
+                </div>
+                <p class="result" id="result" role="status" aria-live="polite" hidden></p>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const form = document.querySelector("#leave-form");
+        const startDate = document.querySelector("#start-date");
+        const endDate = document.querySelector("#end-date");
+        const duration = document.querySelector("#duration");
+        const result = document.querySelector("#result");
+
+        const today = new Date();
+        today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
+        const todayValue = today.toISOString().slice(0, 10);
+        startDate.min = todayValue;
+        endDate.min = todayValue;
+
+        function updateDuration() {
+            if (!startDate.value || !endDate.value) {
+                duration.textContent = "Choose dates to see the duration.";
+                return;
+            }
+
+            const firstDay = Date.parse(`${startDate.value}T00:00:00Z`);
+            const lastDay = Date.parse(`${endDate.value}T00:00:00Z`);
+            const days = Math.round((lastDay - firstDay) / 86400000) + 1;
+            duration.textContent = `${days} calendar ${days === 1 ? "day" : "days"} requested.`;
+        }
+
+        startDate.addEventListener("change", () => {
+            endDate.min = startDate.value || todayValue;
+            if (endDate.value && endDate.value < startDate.value) {
+                endDate.value = "";
+            }
+            updateDuration();
+        });
+        endDate.addEventListener("change", updateDuration);
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault();
+            if (endDate.value < startDate.value) {
+                endDate.setCustomValidity("End date must be on or after the start date.");
+                endDate.reportValidity();
+                return;
+            }
+
+            endDate.setCustomValidity("");
+            result.textContent = "The application is complete, but this demo does not send or save requests.";
+            result.hidden = false;
+        });
+
+        endDate.addEventListener("input", () => endDate.setCustomValidity(""));
+    </script>
+</body>
+</html>
